@@ -4,6 +4,9 @@ import CoinInfoModal from "./CoinInfoModal";
 
 function CoinList() {
   const [showInfoModal, setShowInfoModal] = React.useState(false);
+  const [currencyName, setCurrencyName] = React.useState(
+    "Currency is not defined"
+  );
 
   return (
     <>
@@ -21,7 +24,12 @@ function CoinList() {
           </tr>
         </thead>
         <tbody>
-          <tr onClick={() => setShowInfoModal(true)}>
+          <tr
+            onClick={() => {
+              setShowInfoModal(true);
+              setCurrencyName("Bitcoin");
+            }}
+          >
             <td>1</td>
             <td>Bitcoin</td>
             <td>15151</td>
@@ -31,10 +39,29 @@ function CoinList() {
             <td>XXXX</td>
             <td>XXXX</td>
           </tr>
+          <tr
+            onClick={() => {
+              setShowInfoModal(true);
+              setCurrencyName("tBTC");
+            }}
+          >
+            <td>1</td>
+            <td>tBTC</td>
+            <td>1525151</td>
+            <td>4848884</td>
+            <td>XXXX</td>
+            <td>XXXX</td>
+            <td>XXXX</td>
+            <td>XXXX</td>
+          </tr>
         </tbody>
       </Table>
       {/* передаём состояние из коинлиста */}
-      <CoinInfoModal show={showInfoModal} setShow={setShowInfoModal} />
+      <CoinInfoModal
+        show={showInfoModal}
+        setShow={setShowInfoModal}
+        name={currencyName}
+      />
     </>
   );
 }
