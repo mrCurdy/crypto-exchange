@@ -1,19 +1,17 @@
 import Modal from "react-bootstrap/Modal";
 import CoinInfo from "./CoinInfo";
 
-function CoinInfoModal({ show, setShow }) {
+function CoinInfoModal({ show, setShow, name }) {
   return (
     <>
       <Modal
         size="lg"
         show={show}
         onHide={() => setShow(false)}
-        aria-labelledby="example-modal-sizes-title-lg"
+        aria-labelledby="coin-info-modal"
       >
         <Modal.Header closeButton>
-          <Modal.Title id="example-modal-sizes-title-lg">
-            Large Вьюшка
-          </Modal.Title>
+          <Modal.Title id="coin-info-modal">{name}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <CoinInfo />
