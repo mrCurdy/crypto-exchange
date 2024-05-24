@@ -2,8 +2,9 @@ import Navbar from "react-bootstrap/Navbar";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import NavDropdown from "react-bootstrap/NavDropdown";
+import { Button } from "react-bootstrap"; // исправить
 
-function Header() {
+function Navigation({ setShowSideBar }) {
   return (
     <Navbar className="bg-body-tertiary">
       <Container>
@@ -32,9 +33,14 @@ function Header() {
             </NavDropdown.Item>
           </NavDropdown>
         </Nav>
+        <Navbar.Text className="justify-content-end">
+          <Button variant="primary" onClick={() => setShowSideBar(true)}>
+            Search
+          </Button>
+        </Navbar.Text>
       </Container>
     </Navbar>
   );
 }
 
-export default Header;
+export default Navigation;

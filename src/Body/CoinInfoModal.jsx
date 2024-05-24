@@ -1,7 +1,7 @@
 import Modal from "react-bootstrap/Modal";
 import CoinInfo from "./CoinInfo";
 
-function CoinInfoModal({ show, setShow, name }) {
+function CoinInfoModal({ show, setShow, coinData }) {
   return (
     <>
       <Modal
@@ -11,10 +11,10 @@ function CoinInfoModal({ show, setShow, name }) {
         aria-labelledby="coin-info-modal"
       >
         <Modal.Header closeButton>
-          <Modal.Title id="coin-info-modal">{name}</Modal.Title>
+          <Modal.Title id="coin-info-modal">{coinData.name}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <CoinInfo />
+          <CoinInfo coinData={coinData} />
         </Modal.Body>
       </Modal>
     </>

@@ -2,12 +2,14 @@ import Table from "react-bootstrap/Table";
 import React from "react";
 import CoinInfoModal from "./CoinInfoModal";
 
-function CoinList() {
+function CoinsList() {
   const [showInfoModal, setShowInfoModal] = React.useState(false);
-  const [currencyName, setCurrencyName] = React.useState(
-    "Currency is not defined"
-  );
+  const [coinData, setCoinData] = React.useState({});
 
+  const handleOnClick = (name) => {
+    setShowInfoModal(true);
+    setCoinData({ name });
+  };
   return (
     <>
       <Table striped bordered hover>
@@ -24,31 +26,11 @@ function CoinList() {
           </tr>
         </thead>
         <tbody>
-          <tr
-            onClick={() => {
-              setShowInfoModal(true);
-              setCurrencyName("Bitcoin");
-            }}
-          >
+          <tr onClick={() => handleOnClick("Bitcoin")}>
             <td>1</td>
             <td>Bitcoin</td>
             <td>15151</td>
             <td>48484</td>
-            <td>XXXX</td>
-            <td>XXXX</td>
-            <td>XXXX</td>
-            <td>XXXX</td>
-          </tr>
-          <tr
-            onClick={() => {
-              setShowInfoModal(true);
-              setCurrencyName("tBTC");
-            }}
-          >
-            <td>1</td>
-            <td>tBTC</td>
-            <td>1525151</td>
-            <td>4848884</td>
             <td>XXXX</td>
             <td>XXXX</td>
             <td>XXXX</td>
@@ -60,10 +42,10 @@ function CoinList() {
       <CoinInfoModal
         show={showInfoModal}
         setShow={setShowInfoModal}
-        name={currencyName}
+        coinData={coinData}
       />
     </>
   );
 }
 
-export default CoinList;
+export default CoinsList;
