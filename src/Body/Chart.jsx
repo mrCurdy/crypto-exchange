@@ -56,6 +56,7 @@ const data = [
 function Chart() {
   return (
     <ResponsiveContainer width="100%" height={500}>
+      {/* значения передовать через фигурные  ^^^  скобки */}
       <AreaChart
         width={500}
         height={500}
