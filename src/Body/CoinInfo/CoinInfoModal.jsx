@@ -1,7 +1,12 @@
 import Modal from "react-bootstrap/Modal";
 import CoinInfo from "./CoinInfo";
+import Button from "react-bootstrap/Button";
 
-function CoinInfoModal({ show, setShow, coinData }) {
+function CoinInfoModal({ show, setShow, coinData, setPage }) {
+  const handleOnclick = () => {
+    setPage("page");
+    setShow(false);
+  };
   return (
     <>
       <Modal
@@ -16,6 +21,11 @@ function CoinInfoModal({ show, setShow, coinData }) {
         <Modal.Body>
           <CoinInfo coinData={coinData} />
         </Modal.Body>
+        <Modal.Footer>
+          <Button variant="primary" className="mx-auto" onClick={handleOnclick}>
+            More Information
+          </Button>
+        </Modal.Footer>
       </Modal>
     </>
   );

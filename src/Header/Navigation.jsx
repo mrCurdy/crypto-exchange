@@ -19,6 +19,7 @@ function Navigation({ setShowSideBar }) {
           React Bootstrap
         </Navbar.Brand>
         <Nav className="me-auto">
+          {/* ДЗ при клике на дом переходим домой */}
           <Nav.Link href="#home">Home</Nav.Link>
           <Nav.Link href="#link">Link</Nav.Link>
           <NavDropdown title="Dropdown" id="basic-nav-dropdown">

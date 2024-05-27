@@ -6,10 +6,17 @@ import React from "react";
 
 function App() {
   const [showSideBar, setShowSideBar] = React.useState(false);
+  const [page, setPage] = React.useState("main");
+
   return (
     <Container>
-      <Header setShowSideBar={setShowSideBar} />
-      <Body showSideBar={showSideBar} setShowSideBar={setShowSideBar} />
+      <Header setShowSideBar={setShowSideBar} page={page} />
+      <Body
+        setPage={setPage}
+        showSideBar={showSideBar}
+        setShowSideBar={setShowSideBar}
+        page={page}
+      />
     </Container>
   );
 }
