@@ -5,13 +5,13 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import { Button } from "react-bootstrap"; // исправить
 
 function Navigation({ setShowSideBar, setPage }) {
-  const handleOnClick = () => {
+  const handleClick = () => {
     setPage("main");
   };
   return (
     <Navbar className="bg-body-tertiary">
       <Container>
-        <Navbar.Brand href="#home" onClick={handleOnClick}>
+        <Navbar.Brand href="#home" onClick={handleClick}>
           <img
             alt=""
             src="https://react-bootstrap.netlify.app/img/logo.svg"
@@ -23,7 +23,7 @@ function Navigation({ setShowSideBar, setPage }) {
         </Navbar.Brand>
         <Nav className="me-auto">
           {/* ДЗ при клике на дом переходим домой */}
-          <Nav.Link href="#home" onClick={handleOnClick}>
+          <Nav.Link href="#home" onClick={handleClick}>
             Home
           </Nav.Link>
           <Nav.Link href="#link">Link</Nav.Link>
