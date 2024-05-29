@@ -1,3 +1,4 @@
+import React from "react";
 import {
   AreaChart,
   Area,
@@ -7,60 +8,26 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
+import { getAssetsHistory } from "../../api/assets";
+import { intervals } from "./constants";
 
-const data = [
-  {
-    name: "Page A",
-    uv: 4000,
-    pv: 2400,
-    amt: 2400,
-  },
-  {
-    name: "Page B",
-    uv: 3000,
-    pv: 1398,
-    amt: 2210,
-  },
-  {
-    name: "Page C",
-    uv: 2000,
-    pv: 9800,
-    amt: 2290,
-  },
-  {
-    name: "Page D",
-    uv: 2780,
-    pv: 3908,
-    amt: 2000,
-  },
-  {
-    name: "Page E",
-    uv: 1890,
-    pv: 4800,
-    amt: 2181,
-  },
-  {
-    name: "Page F",
-    uv: 2390,
-    pv: 3800,
-    amt: 2500,
-  },
-  {
-    name: "Page G",
-    uv: 3490,
-    pv: 4300,
-    amt: 2100,
-  },
-];
+// m1, m5, m15, m30, h1, h2, h6, h12, d1
 
-function Chart() {
+function Chart({ coinData }) {
+  const [interval] = React.useState(intervals[0]);
+  const [chartData, setChartData] = React.useState([]);
+
+  React.useEffect(() => {
+    getAssetsHistory(coinData.id, interval).then((json) =>
+      setChartData(json.data)
+    );
+  }, [coinData.id, interval]);
   return (
     <ResponsiveContainer width="100%" height={500}>
-      {/* значения передовать через фигурные  ^^^  скобки */}
       <AreaChart
         width={500}
         height={500}
-        data={data}
+        data={chartData}
         margin={{
           top: 10,
           right: 30,
@@ -69,10 +36,15 @@ function Chart() {
         }}
       >
         <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="name" />
-        <YAxis />
+        <XAxis dataKey="time" />
+        <YAxis dataKey="priceUsd" />
         <Tooltip />
-        <Area type="monotone" dataKey="uv" stroke="#8884d8" fill="#8884d8" />
+        <Area
+          type="monotone"
+          dataKey="priceUsd"
+          stroke="#8884d8"
+          fill="#8884d8"
+        />
       </AreaChart>
     </ResponsiveContainer>
   );

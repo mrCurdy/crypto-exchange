@@ -6,8 +6,9 @@ function Main({ data }) {
   return (
     <Container>
       <Row>
-        {data.map(({ children }) => (
-          <Col>{children}</Col>
+        {/* нужно дать уникальный ключь иначе для реакта он один и тот же, и возникает ошибка */}
+        {data.map(({ children }, index) => (
+          <Col key={index}>{children}</Col>
         ))}
       </Row>
     </Container>

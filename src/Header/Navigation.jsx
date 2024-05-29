@@ -11,7 +11,7 @@ function Navigation({ setShowSideBar, setPage }) {
   return (
     <Navbar className="bg-body-tertiary">
       <Container>
-        <Navbar.Brand onClick={handleClick} href="#home">
+        <Navbar.Brand href="#home" onClick={handleClick}>
           <img
             alt=""
             src="https://react-bootstrap.netlify.app/img/logo.svg"
