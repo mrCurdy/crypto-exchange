@@ -10,7 +10,7 @@ function App() {
 
   return (
     <Container>
-      <Header setShowSideBar={setShowSideBar} page={page} />
+      <Header setShowSideBar={setShowSideBar} page={page} setPage={setPage} />
       <Body
         setPage={setPage}
         showSideBar={showSideBar}
