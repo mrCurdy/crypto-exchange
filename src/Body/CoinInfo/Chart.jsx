@@ -8,20 +8,10 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
-import { getAssetsHistory } from "../../api/assets";
-import { intervals } from "./constants";
 
 // m1, m5, m15, m30, h1, h2, h6, h12, d1
 
-function Chart({ coinData }) {
-  const [interval] = React.useState(intervals[0]);
-  const [chartData, setChartData] = React.useState([]);
-
-  React.useEffect(() => {
-    getAssetsHistory(coinData.id, interval).then((json) =>
-      setChartData(json.data)
-    );
-  }, [coinData.id, interval]);
+function Chart({ coinData, chartData, interval }) {
   return (
     <ResponsiveContainer width="100%" height={500}>
       <AreaChart
