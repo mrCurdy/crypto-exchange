@@ -12,7 +12,7 @@ import { parseToFixed } from "../utils";
 
 function CoinInfo({ coinData }) {
   // перенёс сюда что бы взять HIGH и LOW значения из chartData
-  const [interval] = React.useState(intervals[0]);
+  const [interval] = React.useState(intervals[6]);
   const [chartData, setChartData] = React.useState([]);
 
   React.useEffect(() => {
@@ -44,8 +44,8 @@ function CoinInfo({ coinData }) {
         </Col>
         <Col>
           {/* запросить дополнительные данные */}
-          <div>HIGH ${priceMax} </div>
-          <div>LOW ${priceMin} </div>
+          <div>HIGH ${parseToFixed(priceMax)} </div>
+          <div>LOW ${parseToFixed(priceMin)} </div>
         </Col>
         <Col>
           <div>AVERAGE ${formatedVwap24Hr}</div>
@@ -53,7 +53,7 @@ function CoinInfo({ coinData }) {
         </Col>
       </Row>
       <Row>
-        <Chart coinData={coinData} chartData={chartData} interval={interval} />
+        <Chart chartData={chartData} priceMax={priceMax} priceMin={priceMin} />
       </Row>
     </>
   );

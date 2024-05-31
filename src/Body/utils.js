@@ -1,3 +1,5 @@
+import { format } from "date-fns";
+
 export const parseToFixed = data => parseFloat(data).toFixed(2);
 
 export const coinDataFormat = (coin) => ({
@@ -11,7 +13,7 @@ export const coinDataFormat = (coin) => ({
 });
 
 // нужно взять массив charts и сравнить значения ключей priceUsd и выбрать мин и макс
-export const coinPriceMax = function (array) {
+export const coinPriceMax = (array) => {
     const price = [];
     array.forEach(obj => {
             price.push(parseToFixed(obj.priceUsd));
@@ -19,10 +21,15 @@ export const coinPriceMax = function (array) {
     return Math.max(...price);
 }
 
-export const coinPriceMin = function (array) {
+export const coinPriceMin = (array) => {
     const price = [];
     array.forEach(obj => {
-            price.push(parseToFixed(obj.priceUsd))
+            price.push(obj.priceUsd)
         });
     return Math.min(...price);
 }
+
+// функция для формата даты в понятное написание с помощью библиотеки date-fns
+export const dateFormatter = date => {
+    return format(new Date(date), "dd.MMM");
+  };
