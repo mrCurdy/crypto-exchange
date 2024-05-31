@@ -8,20 +8,9 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
-import { getAssetsHistory } from "../../api/assets";
-import { intervals } from "./constants";
+import { dateFormatter } from "../utils";
 
-// m1, m5, m15, m30, h1, h2, h6, h12, d1
-
-function Chart({ coinData }) {
-  const [interval] = React.useState(intervals[0]);
-  const [chartData, setChartData] = React.useState([]);
-
-  React.useEffect(() => {
-    getAssetsHistory(coinData.id, interval).then((json) =>
-      setChartData(json.data)
-    );
-  }, [coinData.id, interval]);
+function Chart({ chartData, priceMax, priceMin }) {
   return (
     <ResponsiveContainer width="100%" height={500}>
       <AreaChart
@@ -36,8 +25,14 @@ function Chart({ coinData }) {
         }}
       >
         <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="time" />
-        <YAxis dataKey="priceUsd" />
+        {/* вставили форматор даты в XAxis..
+        решение нашёл тут: https://codesandbox.io/p/sandbox/recharts-area-chart-with-date-axis-6o55k?file=%2Fsrc%2FDateArea.js%3A2%2C66-2%2C74 */}
+        <XAxis dataKey="date" tickFormatter={dateFormatter} />
+        <YAxis
+          dataKey="priceUsd"
+          type="number"
+          domain={[Math.floor(priceMin), Math.ceil(priceMax)]}
+        />
         <Tooltip />
         <Area
           type="monotone"
