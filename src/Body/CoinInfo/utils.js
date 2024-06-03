@@ -1,6 +1,6 @@
 import moment from "moment"
 
-export const parseTime = (time) => moment(time).format("DD.MM");
+export const parseTime = (time, format) => moment(time).format(format);
 
 export const buildPeriud = ({number, unit}) => ({
     end: +moment(),

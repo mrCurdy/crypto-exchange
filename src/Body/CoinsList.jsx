@@ -3,11 +3,12 @@ import React from "react";
 import CoinInfoModal from "./CoinInfo/CoinInfoModal";
 import { getAssets } from "../api/assets";
 import { coinDataFormat } from "./utils";
-
+import ErrorModal from "../ErrorModal";
 function CoinsList({ setPage }) {
   const [showInfoModal, setShowInfoModal] = React.useState(false);
   const [coinData, setCoinData] = React.useState({});
   const [coinList, setCoinList] = React.useState([]);
+  const [errorMessage, setErrorMessage] = React.useState(null);
   // после изменения состояния функции перезапускаются, поэтому для хапросов своя фича useEffect
   const handleOnClick = (coin) => {
     setShowInfoModal(true);
@@ -15,12 +16,14 @@ function CoinsList({ setPage }) {
   };
   // срабатывает после запуска компонента. и управляется массивом зависимостиб например пустой массив значит что он сработает один раз
   React.useEffect(() => {
-    getAssets().then((json) => setCoinList(json.data));
+    getAssets()
+      .then((json) => setCoinList(json.data))
+      .catch((error) => setErrorMessage(error.message));
   }, []);
 
   return (
     <>
-      <Table striped bordered hover>
+      <Table striped bordered hover responsive>
         <thead>
           <tr>
             <th>Rank</th>
@@ -60,6 +63,11 @@ function CoinsList({ setPage }) {
         show={showInfoModal}
         setShow={setShowInfoModal}
         coinData={coinData}
+      />
+      <ErrorModal
+        show={!!errorMessage}
+        handleClose={() => setErrorMessage(null)}
+        errorMessage={errorMessage}
       />
     </>
   );
