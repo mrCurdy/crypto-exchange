@@ -4,19 +4,24 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Chart from "./Chart";
 import { getAssetsById } from "../../api/assets";
+import "./coinInfo.css";
+import ErrorModal from "../../ErrorModal";
 
 function CoinInfo({ coinData }) {
   const [coinInfo, setCoinInfo] = React.useState({});
+  const [errorMessage, setErrorMessage] = React.useState(null);
 
   React.useEffect(() => {
-    getAssetsById(coinData.id).then((json) => setCoinInfo(json.data));
+    getAssetsById(coinData.id)
+      .then((json) => setCoinInfo(json.data))
+      .catch((error) => setErrorMessage(error.message));
   }, [coinData.id]);
   return (
     <>
       <Row>
         <Col>
           <Col>
-            <div>Rank: {coinInfo.rank}</div>
+            <div className="rank">Rank: {coinInfo.rank}</div>
           </Col>
           <Row>
             <Col>Logo</Col>
@@ -35,6 +40,11 @@ function CoinInfo({ coinData }) {
       <Row>
         <Chart coinData={coinData} />
       </Row>
+      <ErrorModal
+        show={!!errorMessage}
+        handleClose={() => setErrorMessage(null)}
+        errorMessage={errorMessage}
+      />
     </>
   );
 }

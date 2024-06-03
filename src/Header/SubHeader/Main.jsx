@@ -7,8 +7,12 @@ function Main({ data }) {
     <Container>
       <Row>
         {/* нужно дать уникальный ключь иначе для реакта он один и тот же, и возникает ошибка */}
-        {data.map(({ children }, index) => (
-          <Col key={index}>{children}</Col>
+        {data.map(({ children, value }, index) => (
+          <Col className="text-center" key={index}>
+            {children}
+            <br />
+            {value}
+          </Col>
         ))}
       </Row>
     </Container>
