@@ -6,7 +6,7 @@ import Chart from "./Chart";
 import { getAssetsById } from "../../api/assets";
 import "./coinInfo.css";
 import ErrorModal from "../../ErrorModal";
-import { NumericFormat } from "react-number-format";
+import Number from "../Number";
 
 function CoinInfo({ coinData }) {
   const [coinInfo, setCoinInfo] = React.useState({});
@@ -31,48 +31,18 @@ function CoinInfo({ coinData }) {
         </Col>
         <Col>
           <div>
-            High{" "}
-            <NumericFormat
-              displayType="text"
-              value={7000}
-              prefix={"$"}
-              decimalScale={2}
-              fixedDecimalScale
-              thousandSeparator=","
-            />
+            High <Number value={7000} />
           </div>
           <div>
-            Low{" "}
-            <NumericFormat
-              displayType="text"
-              value={670000}
-              prefix={"$"}
-              decimalScale={2}
-              fixedDecimalScale
-              thousandSeparator=","
-            />
+            Low <Number value={67000} />
           </div>
         </Col>
         <Col>
           <div>
-            Avarage 24h{" "}
-            <NumericFormat
-              displayType="text"
-              value={coinInfo.vwap24Hr}
-              prefix={"$"}
-              decimalScale={2}
-              fixedDecimalScale
-              thousandSeparator=","
-            />
+            Avarage 24h <Number value={coinInfo.vwap24Hr} />
           </div>
           <div>
-            Change 24h{" "}
-            <NumericFormat
-              displayType="text"
-              value={coinInfo.changePercent24Hr}
-              suffix={"%"}
-              decimalScale={2}
-            />
+            Change 24h <Number value={coinInfo.changePercent24Hr} />
           </div>
         </Col>
       </Row>
