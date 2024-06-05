@@ -15,7 +15,8 @@ import ButtonGroup from "react-bootstrap/ButtonGroup";
 import { buildPeriud, parseTime } from "./utils";
 import ErrorModal from "../../ErrorModal";
 
-function Chart({ coinData }) {
+function Chart({ coinData, periodParams }) {
+  // вместо него использовать use navigate use params
   const [period, setPeriod] = React.useState(periods[0]);
   const [chartData, setChartData] = React.useState([]);
   const [errorMessage, setErrorMessage] = React.useState(null);
@@ -33,6 +34,16 @@ function Chart({ coinData }) {
       )
       .catch((error) => setErrorMessage(error.message));
   }, [coinData.id, period]);
+
+  React.useEffect(() => {
+    if (periodParams) {
+      const _period = periods.find(({ label }) => label === periodParams);
+      if (_period) {
+        setPeriod(_period);
+      }
+    }
+  }, [periodParams]);
+
   return (
     <>
       <ResponsiveContainer width="100%" height={500}>

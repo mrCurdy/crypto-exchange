@@ -1,16 +1,22 @@
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import React from "react";
+import { periods } from "./CoinInfo/constants";
+import { useNavigate } from "react-router-dom";
 
 function SearchForm({ closeSideBar }) {
+  const navigate = useNavigate();
   const [searchData, setSearchData] = React.useState({});
+
   const handleOnSubmit = (event) => {
     event.preventDefault();
     // тут console.log event можно поставить и посмотреть путь к значениям
     const coin = event.target.coin.value;
-    const from = event.target.from.value;
-    const dateTo = event.target.dateTo.value;
-    setSearchData({ coin, from, dateTo });
+    // target это то с чем случился event тут это form
+    const period = event.target.period.value;
+
+    navigate(`/coin/${coin}/${period}`);
+
     closeSideBar();
   };
 
@@ -24,14 +30,15 @@ function SearchForm({ closeSideBar }) {
         <Form.Text className="text-muted">Example: "BTC"</Form.Text>
       </Form.Group>
 
-      <Form.Group className="mb-3" controlId="from" name="from">
-        <Form.Label>Date from</Form.Label>
-        <Form.Control type="date" placeholder="Date from" />
-      </Form.Group>
-
-      <Form.Group className="mb-3" controlId="dateTo">
-        <Form.Label>Date to</Form.Label>
-        <Form.Control type="date" placeholder="Date to" name="dateTo" />
+      <Form.Group className="mb-3" controlId="period">
+        <Form.Label>Period</Form.Label>
+        <Form.Select name="period">
+          {periods.map((period, index) => (
+            <option key={index} value={period.label}>
+              {period.label}
+            </option>
+          ))}
+        </Form.Select>
       </Form.Group>
 
       <Button variant="primary" type="submit" className="w-100">

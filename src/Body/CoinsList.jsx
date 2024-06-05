@@ -6,12 +6,12 @@ import { coinDataFormat } from "./utils";
 import ErrorModal from "../ErrorModal";
 import Number from "./Number";
 
-function CoinsList({ setPage }) {
+function CoinsList() {
   const [showInfoModal, setShowInfoModal] = React.useState(false);
   const [coinData, setCoinData] = React.useState({});
   const [coinList, setCoinList] = React.useState([]);
   const [errorMessage, setErrorMessage] = React.useState(null);
-  // после изменения состояния функции перезапускаются, поэтому для хапросов своя фича useEffect
+  // после изменения состояния функции перезапускаются, поэтому для pапросов своя фича useEffect
   const handleOnClick = (coin) => {
     setShowInfoModal(true);
     setCoinData(coin);
@@ -63,7 +63,7 @@ function CoinsList({ setPage }) {
                 <td>
                   <Number value={formatedCoin.volumeUsd24Hr} />
                 </td>
-                <td>{formatedCoin.changePercent24Hr}</td>
+                <td>{formatedCoin.changePercent24Hr}%</td>
               </tr>
             );
           })}
@@ -71,7 +71,6 @@ function CoinsList({ setPage }) {
       </Table>
       {/* передаём состояние из коинлиста */}
       <CoinInfoModal
-        setPage={setPage}
         show={showInfoModal}
         setShow={setShowInfoModal}
         coinData={coinData}
