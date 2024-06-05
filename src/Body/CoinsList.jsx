@@ -4,6 +4,8 @@ import CoinInfoModal from "./CoinInfo/CoinInfoModal";
 import { getAssets } from "../api/assets";
 import { coinDataFormat } from "./utils";
 import ErrorModal from "../ErrorModal";
+import { NumericFormat } from "react-number-format";
+
 function CoinsList({ setPage }) {
   const [showInfoModal, setShowInfoModal] = React.useState(false);
   const [coinData, setCoinData] = React.useState({});
@@ -46,12 +48,64 @@ function CoinsList({ setPage }) {
               >
                 <td>{formatedCoin.rank}</td>
                 <td>{formatedCoin.name}</td>
-                <td>{formatedCoin.priceUsd}</td>
-                <td>{formatedCoin.marketCapUsd}</td>
-                <td>{formatedCoin.vwap24Hr}</td>
-                <td>{formatedCoin.supply}</td>
-                <td>{formatedCoin.volumeUsd24Hr}</td>
-                <td>{formatedCoin.changePercent24Hr}</td>
+                <td>
+                  <NumericFormat
+                    displayType="text"
+                    value={formatedCoin.priceUsd}
+                    prefix={"$"}
+                    decimalScale={2}
+                    fixedDecimalScale
+                    thousandSeparator=","
+                  />
+                </td>
+                <td>
+                  <NumericFormat
+                    displayType="text"
+                    value={formatedCoin.marketCapUsd}
+                    prefix={"$"}
+                    decimalScale={2}
+                    fixedDecimalScale
+                    thousandSeparator=","
+                  />
+                </td>
+                <td>
+                  <NumericFormat
+                    displayType="text"
+                    value={formatedCoin.vwap24Hr}
+                    prefix={"$"}
+                    decimalScale={2}
+                    fixedDecimalScale
+                    thousandSeparator=","
+                  />
+                </td>
+                <td>
+                  <NumericFormat
+                    displayType="text"
+                    value={formatedCoin.supply}
+                    prefix={"$"}
+                    decimalScale={2}
+                    fixedDecimalScale
+                    thousandSeparator=","
+                  />
+                </td>
+                <td>
+                  <NumericFormat
+                    displayType="text"
+                    value={formatedCoin.volumeUsd24Hr}
+                    prefix={"$"}
+                    decimalScale={2}
+                    fixedDecimalScale
+                    thousandSeparator=","
+                  />
+                </td>
+                <td>
+                  <NumericFormat
+                    displayType="text"
+                    value={formatedCoin.changePercent24Hr}
+                    suffix={"%"}
+                    decimalScale={2}
+                  />
+                </td>
               </tr>
             );
           })}
