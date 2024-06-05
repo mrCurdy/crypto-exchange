@@ -49,8 +49,11 @@ function Chart({ coinData }) {
         >
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="date" />
-          {/* domain как то криво работает */}
-          <YAxis dataKey="priceUsd" domain={["dataMin", "dataMax"]} />
+          {/* domain как то криво работает, его нужно отформатировать */}
+          <YAxis
+            dataKey="priceUsd"
+            // domain={["dataMin", "dataMax"]}
+          />
           <Tooltip />
           <defs>
             <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">

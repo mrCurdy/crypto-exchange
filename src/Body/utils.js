@@ -1,4 +1,4 @@
-const parseToFixed = data => parseFloat(data).toFixed(2);
+export const parseToFixed = data => parseFloat(data).toFixed(2);
 
 export const coinDataFormat = (coin) => ({
     ...coin,
