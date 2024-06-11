@@ -24,21 +24,3 @@ export const mainSubheader = [
         value: '53.9%',
     },
 ];
-
-export const pageSubHeader = [
-    {
-        children: "Rank 1",
-    },
-    {
-        children: "Bitcoin",
-    },
-    {
-        children: "Market cup",
-    },
-    {
-        children: "Volume",
-    },
-    {
-        children: "Supply",
-    },
-];

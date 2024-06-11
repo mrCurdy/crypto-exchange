@@ -1,6 +1,5 @@
 import Navigation from "./Navigation";
-import MainSubHeader from "./SubHeader/Main";
-import { mainSubheader } from "./SubHeader/constants";
+import Main from "./SubHeader/Main";
 import { useMatch } from "react-router-dom";
 
 function Header(props) {
@@ -9,7 +8,7 @@ function Header(props) {
   return (
     <>
       <Navigation {...props} />
-      {match && <MainSubHeader data={mainSubheader} />}
+      {match && <Main />}
     </>
   );
 }

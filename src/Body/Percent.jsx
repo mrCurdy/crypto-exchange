@@ -1,12 +1,13 @@
 import { NumericFormat } from "react-number-format";
 
-const Number = ({ value }) => (
+const Percent = ({ value }) => (
   <NumericFormat
     value={value}
     displayType={"text"}
     thousandSeparator
-    prefix={"$"}
+    suffix={"%"}
+    decimalScale={2}
   />
 );
 
-export default Number;
+export default Percent;
