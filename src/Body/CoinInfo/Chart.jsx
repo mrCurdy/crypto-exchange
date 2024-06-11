@@ -15,7 +15,7 @@ import ButtonGroup from "react-bootstrap/ButtonGroup";
 import { buildPeriud, parseTime } from "./utils";
 import ErrorModal from "../../ErrorModal";
 
-function Chart({ coinData, periodParams }) {
+function Chart({ coinData, periodParams, setPricePoints }) {
   // вместо него использовать use navigate use params
   const [period, setPeriod] = React.useState(periods[0]);
   const [chartData, setChartData] = React.useState([]);
@@ -24,14 +24,29 @@ function Chart({ coinData, periodParams }) {
   React.useEffect(() => {
     const { start, end } = buildPeriud(period);
     getAssetsHistory(coinData.id, period.interval, start, end)
-      .then((json) =>
+      .then((json) => {
         setChartData(
           json.data.map(({ time, ...rest }) => ({
             ...rest,
             date: parseTime(time, period.dateFormat),
           }))
-        )
-      )
+        );
+
+        const pricePoints = json.data.sort((a, b) => {
+          if (a.priceUsd > b.priceUsd) {
+            return 1;
+          }
+          if (a.priceUsd < b.priceUsd) {
+            return -1;
+          }
+          return 0;
+        });
+
+        setPricePoints({
+          low: pricePoints[0].priceUsd,
+          high: pricePoints[pricePoints.length - 1].priceUsd,
+        });
+      })
       .catch((error) => setErrorMessage(error.message));
   }, [coinData.id, period]);
 
@@ -63,6 +78,9 @@ function Chart({ coinData, periodParams }) {
           {/* domain как то криво работает, его нужно отформатировать */}
           <YAxis
             dataKey="priceUsd"
+            orientation="right"
+            tickFormatter={(value) => `${value.toFixed(2)}`}
+            mirror
             // domain={["dataMin", "dataMax"]}
           />
           <Tooltip />

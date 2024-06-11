@@ -1,19 +1,29 @@
+import React from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import { getGlobalInfo } from "../../api/assets";
 
-function Main({ data }) {
+function Main() {
+  const [globalInfo, setGlobalInfo] = React.useState({});
+  const [errorMessage, setErrorMessage] = React.useState(null);
+
+  React.useEffect(() => {
+    getGlobalInfo()
+      .then((json) => setGlobalInfo(json.data))
+      .catch((error) => setErrorMessage(error.message));
+    console.log(globalInfo);
+    console.log(errorMessage);
+  }, []);
+
   return (
     <Container>
       <Row>
-        {/* нужно дать уникальный ключь иначе для реакта он один и тот же, и возникает ошибка */}
-        {data.map(({ children, value }, index) => (
-          <Col className="text-center" key={index}>
-            {children}
-            <br />
-            {value}
-          </Col>
-        ))}
+        <Col className="text-center">
+          <p>MARKET CAP</p>
+          <br />
+          {/* <p>{globalInfo.market_cap_usd}</p> */}
+        </Col>
       </Row>
     </Container>
   );

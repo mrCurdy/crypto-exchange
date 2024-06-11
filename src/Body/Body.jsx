@@ -2,7 +2,7 @@ import CoinsList from "./CoinsList";
 import SearchSideBar from "./SearchSideBar";
 import CoinInfo from "./CoinInfo/CoinInfo";
 import { Routes, Route } from "react-router-dom";
-import Contact from "./Contact";
+import Contact from "./Contact/Contact";
 
 function Body(props) {
   return (

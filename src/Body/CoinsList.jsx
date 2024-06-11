@@ -4,7 +4,7 @@ import CoinInfoModal from "./CoinInfo/CoinInfoModal";
 import { getAssets } from "../api/assets";
 import { coinDataFormat } from "./utils";
 import ErrorModal from "../ErrorModal";
-import Number from "./Number";
+import PriceTag from "./PriceTag";
 
 function CoinsList() {
   const [showInfoModal, setShowInfoModal] = React.useState(false);
@@ -49,19 +49,19 @@ function CoinsList() {
                 <td>{formatedCoin.rank}</td>
                 <td>{formatedCoin.name}</td>
                 <td>
-                  <Number value={formatedCoin.priceUsd} />
+                  <PriceTag value={formatedCoin.priceUsd} />
                 </td>
                 <td>
-                  <Number value={formatedCoin.marketCapUsd} />
+                  <PriceTag value={formatedCoin.marketCapUsd} />
                 </td>
                 <td>
-                  <Number value={formatedCoin.vwap24Hr} />
+                  <PriceTag value={formatedCoin.vwap24Hr} />
                 </td>
                 <td>
-                  <Number value={formatedCoin.supply} />
+                  <PriceTag value={formatedCoin.supply} />
                 </td>
                 <td>
-                  <Number value={formatedCoin.volumeUsd24Hr} />
+                  <PriceTag value={formatedCoin.volumeUsd24Hr} />
                 </td>
                 <td>{formatedCoin.changePercent24Hr}%</td>
               </tr>

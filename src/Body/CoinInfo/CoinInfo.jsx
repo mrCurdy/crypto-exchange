@@ -6,12 +6,17 @@ import Chart from "./Chart";
 import { getAssetsById } from "../../api/assets";
 import "./coinInfo.css";
 import ErrorModal from "../../ErrorModal";
-import Number from "../Number";
+import PriceTag from "../PriceTag";
+import Percent from "../Percent";
 import { useParams } from "react-router-dom";
 
 function CoinInfo({ coinData }) {
   const [coinInfo, setCoinInfo] = React.useState({});
   const [errorMessage, setErrorMessage] = React.useState(null);
+  const [pricePoints, setPricePoints] = React.useState({
+    high: 0,
+    low: 0,
+  });
 
   const { id, period } = useParams();
 
@@ -35,23 +40,27 @@ function CoinInfo({ coinData }) {
         </Col>
         <Col>
           <div>
-            High <Number value={7000} />
+            High <PriceTag value={pricePoints.high} />
           </div>
           <div>
-            Low <Number value={67000} />
+            Low <PriceTag value={pricePoints.low} />
           </div>
         </Col>
         <Col>
           <div>
-            Avarage 24h <Number value={coinInfo.vwap24Hr} />
+            Avarage 24h <PriceTag value={coinInfo.vwap24Hr} />
           </div>
           <div>
-            Change 24h <Number value={coinInfo.changePercent24Hr} />
+            Change 24h <Percent value={coinInfo.changePercent24Hr} />
           </div>
         </Col>
       </Row>
       <Row>
-        <Chart coinData={coinData || { id }} periodParams={period} />
+        <Chart
+          coinData={coinData || { id }}
+          periodParams={period}
+          setPricePoints={setPricePoints}
+        />
       </Row>
       <ErrorModal
         show={!!errorMessage}
