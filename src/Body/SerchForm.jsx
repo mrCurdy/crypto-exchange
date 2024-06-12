@@ -4,11 +4,13 @@ import React from "react";
 import { periods } from "./CoinInfo/constants";
 import { searchAssets } from "../api/assets";
 import { Link } from "react-router-dom";
+import { setFoundCoins } from "../service/state";
+import { useSelector, useDispatch } from "react-redux";
 
 function SearchForm({ closeSideBar }) {
-  const [searchData, setSearchData] = React.useState({});
-  const [foundCoins, setFoundCoins] = React.useState([]);
   const [period, setPeriod] = React.useState(null);
+  const foundCoins = useSelector((state) => state.foundCoins);
+  const dispatch = useDispatch();
 
   const handleOnSubmit = (event) => {
     event.preventDefault();
@@ -18,7 +20,7 @@ function SearchForm({ closeSideBar }) {
     const period = event.target.period.value;
 
     setPeriod(period);
-    searchAssets(coin).then((json) => setFoundCoins(json.data));
+    searchAssets(coin).then((json) => dispatch(setFoundCoins(json.data)));
 
     // closeSideBar();
   };
@@ -45,7 +47,7 @@ function SearchForm({ closeSideBar }) {
       <Button variant="primary" type="submit" className="w-100">
         Search
       </Button>
-      {foundCoins.length
+      {foundCoins?.length
         ? foundCoins
             .filter((coin) => !!coin.changePercent24Hr)
             .map((coin) => (
