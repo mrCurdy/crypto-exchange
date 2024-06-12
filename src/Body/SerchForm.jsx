@@ -2,11 +2,13 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import React from "react";
 import { periods } from "./CoinInfo/constants";
-import { useNavigate } from "react-router-dom";
+import { searchAssets } from "../api/assets";
+import { Link } from "react-router-dom";
 
 function SearchForm({ closeSideBar }) {
-  const navigate = useNavigate();
   const [searchData, setSearchData] = React.useState({});
+  const [foundCoins, setFoundCoins] = React.useState([]);
+  const [period, setPeriod] = React.useState(null);
 
   const handleOnSubmit = (event) => {
     event.preventDefault();
@@ -15,12 +17,11 @@ function SearchForm({ closeSideBar }) {
     // target это то с чем случился event тут это form
     const period = event.target.period.value;
 
-    navigate(`/coin/${coin}/${period}`);
+    setPeriod(period);
+    searchAssets(coin).then((json) => setFoundCoins(json.data));
 
-    closeSideBar();
+    // closeSideBar();
   };
-
-  console.log(searchData);
 
   return (
     <Form onSubmit={handleOnSubmit}>
@@ -44,6 +45,20 @@ function SearchForm({ closeSideBar }) {
       <Button variant="primary" type="submit" className="w-100">
         Search
       </Button>
+      {foundCoins.length
+        ? foundCoins
+            .filter((coin) => !!coin.changePercent24Hr)
+            .map((coin) => (
+              <div key={coin.id}>
+                <Link
+                  to={`/coin/${coin.id}/${period}/`}
+                  onClick={() => closeSideBar()}
+                >
+                  {coin.name}
+                </Link>
+              </div>
+            ))
+        : null}
     </Form>
   );
 }
