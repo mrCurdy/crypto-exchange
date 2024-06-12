@@ -5,16 +5,16 @@ import Col from "react-bootstrap/Col";
 import { getGlobalInfo } from "../../api/assets";
 
 function Main() {
-  const [globalInfo, setGlobalInfo] = React.useState({});
-  const [errorMessage, setErrorMessage] = React.useState(null);
+  // const [globalInfo, setGlobalInfo] = React.useState({});
+  // const [errorMessage, setErrorMessage] = React.useState(null);
 
-  React.useEffect(() => {
-    getGlobalInfo()
-      .then((json) => setGlobalInfo(json.data))
-      .catch((error) => setErrorMessage(error.message));
-    console.log(globalInfo);
-    console.log(errorMessage);
-  }, []);
+  // React.useEffect(() => {
+  //   getGlobalInfo()
+  //     .then((json) => setGlobalInfo(json.data))
+  //     .catch((error) => setErrorMessage(error.message));
+  //   console.log(globalInfo);
+  //   console.log(errorMessage);
+  // }, []);
 
   return (
     <Container>
