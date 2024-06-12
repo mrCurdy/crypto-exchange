@@ -1,26 +1,20 @@
+import TrillionNumber from "./TrillionNumber";
+
 export const mainSubheader = [
     {
-        children: 'MARKET CAP \n ',
-        value: '$2.49T',
+        children: 'MARKET CAP',
+        property: "market_cap_usd",
+        Component: TrillionNumber,
     },
     {
         children: "EXCHANGE VOL",
-        value: '$57.85B',
+        property: "bitcoin_dominance_percentage",
+        Component: ({ value }) => value,
+
     },
     {
-        children: "ASSETS",
-        value: '2,297',
-    },
-    {
-        children: "EXCHANGES",
-        value: '73',
-    },
-    {
-        children: "MARKETS",
-        value: '9,066',
-    },
-    {
-        children: "BTC DOM INDEX",
-        value: '53.9%',
+        children: "MARKET CAP CHANGE 24H",
+        property: 'market_cap_change_24h',
+        Component: ({ value }) => value,
     },
 ];
