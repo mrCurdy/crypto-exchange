@@ -3,8 +3,13 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { getGlobalInfo } from "../../api/assets";
+import { AppContext } from "../../providers/AppProvider";
 
 function Main() {
+  const { switchHighlights } = React.useContext(AppContext);
+
+  if (!switchHighlights) return null;
+
   // const [globalInfo, setGlobalInfo] = React.useState({});
   // const [errorMessage, setErrorMessage] = React.useState(null);
 
