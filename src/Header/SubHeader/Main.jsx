@@ -11,14 +11,12 @@ function Main({ data }) {
 
   return (
     <Container>
-      <Row>
-        <Col className="text-center">
-          {data.map(({ children, property, Component }, index) => (
-            <Col key={index}>
-              {children} <Component value={property} />
-            </Col>
-          ))}
-        </Col>
+      <Row className="text-center">
+        {data.map(({ children, property, Component }, index) => (
+          <Col key={index}>
+            {children} <Component value={globalInfo[property]} />
+          </Col>
+        ))}
       </Row>
     </Container>
   );

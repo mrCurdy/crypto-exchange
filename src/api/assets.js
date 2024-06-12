@@ -42,5 +42,17 @@ export const getAssetsById = async (id) => {
 
     return data;
 }
+export const searchAssets = async (searchString) => {
+const params = new URLSearchParams({search: searchString,})
 
+    const response = await fetch(`${apiUrl}/assets?${params}`);
+
+    const data = await response.json();
+    
+    if (!response.ok) {
+        throw new Error(data?.error || "Search call failed");
+    }
+// await потому что promice (внутри json())
+    return data;
+};
 
