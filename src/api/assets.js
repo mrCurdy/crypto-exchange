@@ -1,5 +1,5 @@
 const apiUrl = 'https://api.coincap.io/v2';
-const coinPapricaUrl = 'https://api.coinpaprika.com/v1';
+
 // асинхронная что бы не ждать объект promise
 
 export const getAssets = async () => {
@@ -43,14 +43,4 @@ export const getAssetsById = async (id) => {
     return data;
 }
 
-export const getGlobalInfo = async () => {
-    const response = await fetch(`${coinPapricaUrl}/global`);
 
-    const data = await response.json();
-    
-    if (!response.ok) {
-        throw new Error(data?.error || "Call from global failed");
-    }
-
-    return data;
-}
