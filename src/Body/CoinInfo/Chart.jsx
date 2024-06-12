@@ -13,13 +13,14 @@ import { periods } from "./constants";
 import Button from "react-bootstrap/Button";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import { buildPeriud, parseTime } from "./utils";
-import ErrorModal from "../../ErrorModal";
+import { useDispatch } from "react-redux";
+import { setErrorMessage } from "../../service/state";
 
 function Chart({ coinData, periodParams, setPricePoints }) {
   // вместо него использовать use navigate use params
   const [period, setPeriod] = React.useState(periods[0]);
   const [chartData, setChartData] = React.useState([]);
-  const [errorMessage, setErrorMessage] = React.useState(null);
+  const dispatch = useDispatch();
 
   React.useEffect(() => {
     const { start, end } = buildPeriud(period);
@@ -47,8 +48,8 @@ function Chart({ coinData, periodParams, setPricePoints }) {
           high: pricePoints[pricePoints.length - 1].priceUsd,
         });
       })
-      .catch((error) => setErrorMessage(error.message));
-  }, [coinData.id, period]);
+      .catch((error) => dispatch(setErrorMessage(error.message)));
+  }, [coinData.id, period, setPricePoints, dispatch]);
 
   React.useEffect(() => {
     if (periodParams) {
@@ -112,11 +113,6 @@ function Chart({ coinData, periodParams, setPricePoints }) {
           </Button>
         ))}
       </ButtonGroup>
-      <ErrorModal
-        show={!!errorMessage}
-        handleClose={() => setErrorMessage(null)}
-        errorMessage={errorMessage}
-      />
     </>
   );
 }

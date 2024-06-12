@@ -5,8 +5,12 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import Button from "react-bootstrap/Button";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setShowSideBar } from "../service/state";
 
-function Navigation({ setShowSideBar }) {
+function Navigation() {
+  const dispatch = useDispatch();
+
   return (
     <Navbar className="bg-body-tertiary" expand="md">
       <Container fluid>
@@ -57,7 +61,7 @@ function Navigation({ setShowSideBar }) {
               <Button
                 variant="primary"
                 className="w-100"
-                onClick={() => setShowSideBar(true)}
+                onClick={() => dispatch(setShowSideBar(true))}
               >
                 Search
               </Button>

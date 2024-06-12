@@ -5,18 +5,19 @@ import Col from "react-bootstrap/Col";
 import Chart from "./Chart";
 import { getAssetsById } from "../../api/assets";
 import "./coinInfo.css";
-import ErrorModal from "../../ErrorModal";
 import PriceTag from "../PriceTag";
 import Percent from "../Percent";
 import { useParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setErrorMessage } from "../../service/state";
 
 function CoinInfo({ coinData }) {
   const [coinInfo, setCoinInfo] = React.useState({});
-  const [errorMessage, setErrorMessage] = React.useState(null);
   const [pricePoints, setPricePoints] = React.useState({
     high: 0,
     low: 0,
   });
+  const dispatch = useDispatch();
 
   const { id, period } = useParams();
 
@@ -24,8 +25,8 @@ function CoinInfo({ coinData }) {
     // coinData? = если коин дата не является обьектом то читать его не будет
     getAssetsById(coinData?.id || id)
       .then((json) => setCoinInfo(json.data))
-      .catch((error) => setErrorMessage(error.message));
-  }, [coinData?.id, id]);
+      .catch((error) => dispatch(setErrorMessage(error.message)));
+  }, [coinData?.id, id, dispatch]);
   return (
     <>
       <Row>
@@ -62,11 +63,6 @@ function CoinInfo({ coinData }) {
           setPricePoints={setPricePoints}
         />
       </Row>
-      <ErrorModal
-        show={!!errorMessage}
-        handleClose={() => setErrorMessage(null)}
-        errorMessage={errorMessage}
-      />
     </>
   );
 }

@@ -5,12 +5,10 @@ import Body from "./Body";
 import React from "react";
 
 function App() {
-  const [showSideBar, setShowSideBar] = React.useState(false);
-
   return (
     <Container>
-      <Header setShowSideBar={setShowSideBar} />
-      <Body showSideBar={showSideBar} setShowSideBar={setShowSideBar} />
+      <Header />
+      <Body />
     </Container>
   );
 }
