@@ -21,8 +21,6 @@ function SearchForm({ closeSideBar }) {
 
     setPeriod(period);
     searchAssets(coin).then((json) => dispatch(setFoundCoins(json.data)));
-
-    // closeSideBar();
   };
 
   return (
@@ -47,7 +45,7 @@ function SearchForm({ closeSideBar }) {
       <Button variant="primary" type="submit" className="w-100">
         Search
       </Button>
-      {foundCoins?.length
+      {foundCoins.length
         ? foundCoins
             .filter((coin) => !!coin.changePercent24Hr)
             .map((coin) => (

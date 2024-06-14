@@ -4,7 +4,7 @@ const initialState = {
     showSideBar: false,
     errorMessage: null,
     coinData: null,
-    foundCoins: null,
+    foundCoins: [],
 
 }
 
