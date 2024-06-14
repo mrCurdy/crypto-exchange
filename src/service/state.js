@@ -5,6 +5,7 @@ const initialState = {
     errorMessage: null,
     coinData: null,
     foundCoins: [],
+    period: null,
 
 }
 
@@ -12,6 +13,7 @@ export const setShowSideBar = createAction("setShowSideBar");
 export const setErrorMessage = createAction("setErrorMessage");
 export const setCoinData = createAction("setCoinData");
 export const setFoundCoins = createAction("setFoundCoins");
+export const setSearchPeriod = createAction("setPeriod")
 
 const appReducer = createReducer(initialState, (builder) => {
     builder
@@ -23,6 +25,8 @@ const appReducer = createReducer(initialState, (builder) => {
         state.coinData = action.payload;
     }).addCase(setFoundCoins, (state, action) => {
         state.foundCoins = action.payload;
+    }).addCase(setSearchPeriod, (state, action) => {
+        state.searchPeriod = action.payload;
     });
 });
 
