@@ -12,11 +12,12 @@ import { getAssetsHistory } from "../../api/assets";
 import { periods } from "./constants";
 import Button from "react-bootstrap/Button";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
-import { buildPeriud, parseTime } from "./utils";
+import { buildPeriud, parseTime, formatTick } from "./utils";
 import { useDispatch } from "react-redux";
 import { setErrorMessage } from "../../service/state";
+import { sortPrice } from "./utils";
 
-function Chart({ coinData, periodParams, setPricePoints }) {
+function Chart({ coinData, periodParams, setPricePoints, pricePoints }) {
   // вместо него использовать use navigate use params
   const [period, setPeriod] = React.useState(periods[0]);
   const [chartData, setChartData] = React.useState([]);
@@ -33,19 +34,11 @@ function Chart({ coinData, periodParams, setPricePoints }) {
           }))
         );
 
-        const pricePoints = json.data.sort((a, b) => {
-          if (a.priceUsd > b.priceUsd) {
-            return 1;
-          }
-          if (a.priceUsd < b.priceUsd) {
-            return -1;
-          }
-          return 0;
-        });
+        const pricePoints = json.data.sort(sortPrice);
 
         setPricePoints({
-          low: pricePoints[0].priceUsd,
-          high: pricePoints[pricePoints.length - 1].priceUsd,
+          low: formatTick(pricePoints[0].priceUsd),
+          high: formatTick(pricePoints[pricePoints.length - 1].priceUsd),
         });
       })
       .catch((error) => dispatch(setErrorMessage(error.message)));
@@ -80,9 +73,9 @@ function Chart({ coinData, periodParams, setPricePoints }) {
           <YAxis
             dataKey="priceUsd"
             orientation="right"
-            tickFormatter={(value) => `${value.toFixed(2)}`}
+            tickFormatter={(value) => formatTick(value)}
             mirror
-            // domain={["dataMin", "dataMax"]}
+            domain={[() => pricePoints.low, () => pricePoints.high]}
           />
           <Tooltip />
           <defs>
