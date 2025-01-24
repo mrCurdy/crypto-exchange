@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/crypto-exchange/static/css/main.76633963.css",
+    "main.js": "/crypto-exchange/static/js/main.dcd5a427.js",
+    "index.html": "/crypto-exchange/index.html",
+    "main.76633963.css.map": "/crypto-exchange/static/css/main.76633963.css.map",
+    "main.dcd5a427.js.map": "/crypto-exchange/static/js/main.dcd5a427.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.76633963.css",
+    "static/js/main.dcd5a427.js"
+  ]
+}
